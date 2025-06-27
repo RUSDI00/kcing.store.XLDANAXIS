@@ -1,6 +1,21 @@
-# Getting Started with Create React App
+# Kcing.Hitam Store Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a React-based website for Kcing.Hitam Store, a seller of XL and AXIS mobile data quotas.
+
+## Features
+
+- Responsive design that works on all devices
+- Product catalog with pricing
+- Checkout flow with ShopeePay and QRIS payment options
+- WhatsApp integration for order processing
+
+## Tech Stack
+
+- React
+- TypeScript
+- Styled-components for styling
+- React Router for navigation
+- React Icons for UI icons
 
 ## Available Scripts
 
@@ -39,8 +54,9 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Additional Information
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Store: KCING.HITAM STORE, Estd. 2022
+- Location: Rantauprapat, Sumatera Utara
+- Contact: WhatsApp 082268913491
+- Instagram: @kcing.hitam
