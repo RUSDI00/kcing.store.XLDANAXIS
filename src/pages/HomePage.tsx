@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Hero from '../components/Hero';
 import ProductCard from '../components/ProductCard';
-import products from '../data/products';
+import { productAPI } from '../services/api';
 import { FaShieldAlt, FaMoneyBillWave, FaRegClock } from 'react-icons/fa';
 import { Icon } from '../components/IconWrapper';
+
+interface Product {
+  id: number;
+  title: string;
+  data_size: string;
+  price: number;
+  is_active: boolean;
+}
 
 const HomeContainer = styled.div`
   min-height: 100vh;
@@ -78,6 +86,31 @@ const FeatureCard = styled.div`
 `;
 
 const HomePage: React.FC = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await productAPI.getProducts();
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Failed to fetch products:', error);
+        // Fallback to static data if API fails
+        setProducts([
+          { id: 1, title: "Kuota XL/AXIS 120GB", data_size: "120GB", price: 85000, is_active: true },
+          { id: 2, title: "Kuota XL/AXIS 71GB", data_size: "71GB", price: 65000, is_active: true },
+          { id: 3, title: "Kuota XL/AXIS 59GB", data_size: "59GB", price: 60000, is_active: true },
+          { id: 4, title: "Kuota XL/AXIS 48GB", data_size: "48GB", price: 55000, is_active: true }
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
     <HomeContainer>
       <Hero />
@@ -85,15 +118,19 @@ const HomePage: React.FC = () => {
       <ProductsSection>
         <SectionTitle>Pilihan Kuota Terbaik</SectionTitle>
         <ProductGrid>
-          {products.map((product) => (
-            <ProductCard 
-              key={product.id}
-              id={product.id}
-              title={product.title}
-              price={product.price}
-              dataSize={product.dataSize}
-            />
-          ))}
+          {loading ? (
+            <div style={{ textAlign: 'center', gridColumn: '1 / -1' }}>Loading products...</div>
+          ) : (
+            products.map((product: Product) => (
+              <ProductCard 
+                key={product.id}
+                id={product.id}
+                title={product.title}
+                price={product.price}
+                dataSize={product.data_size}
+              />
+            ))
+          )}
         </ProductGrid>
       </ProductsSection>
       
